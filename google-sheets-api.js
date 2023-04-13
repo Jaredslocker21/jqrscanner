@@ -2,8 +2,8 @@
 gapi.load('client', function() {
     // Initialize the API client with your OAuth client ID and secret
     gapi.client.init({
-      clientId: 'YOUR_CLIENT_ID',
-      clientSecret: 'YOUR_CLIENT_SECRET',
+      clientId: '115823463125052449677',
+      clientSecret: 'cbf2b555ba6769343425be5ad40f46b76f2a4588',
       discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
       scope: 'https://www.googleapis.com/auth/spreadsheets'
     }).then(function() {
@@ -11,8 +11,8 @@ gapi.load('client', function() {
       return gapi.auth2.getAuthInstance().signIn();
     }).then(function() {
       // Define the spreadsheet and sheet you want to write to
-      var spreadsheetId = 'YOUR_SPREADSHEET_ID';
-      var sheetName = 'YOUR_SHEET_NAME';
+      var spreadsheetId = '1KC24sb5kQcOvT2kc93eQaTelDY5YJXPMj6z-ZDHqyyU';//'YOUR_SPREADSHEET_ID'
+      var sheetName = 'Attendees';//'SHEET_NAME'
       var sheetRange = sheetName + '!A1:C1';
       // Define the data to write
       var qrCodeMessage = document.getElementById('result').innerHTML;
