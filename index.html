@@ -29,21 +29,10 @@
 
 <!--display result-->
 <script type="text/javascript">
+  let shouldStoreData = true;
   async function storeData(qrData) {
-    // try {
-    //   const res = fetch("https://jqrscanner-production.up.railway.app/addData", {
-    //     method: "POST",
-    //     body: JSON.stringify({
-    //       values: qrData
-    //     })
-    //   });
-    //   alert("Data saved.")
-    // } catch (error) {
-    //   console.log(error);
-    //   alert("Something went wrong!!!")
-    // }
-
-    var myHeaders = new Headers();
+    shouldStoreData = false;
+     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({
@@ -59,7 +48,11 @@
 
     fetch("https://jqrscanner-production.up.railway.app/addData", requestOptions)
       .then(response => response.text())
-      .then(result => console.log(result))
+      .then(result => {
+        console.log(result)
+        alert("saved")
+        shouldStoreData = true
+      })
       .catch(error => console.log('error', error));
   }
 
@@ -70,7 +63,9 @@
     const tel = split1[1].split(":")[1]
     const email = split1[2].split(":")[1]
 
-    await storeData([name, tel, email])
+    if(shouldStoreData) {
+      await storeData([name, tel, email])
+    }
 
   }
 
