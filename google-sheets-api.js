@@ -15,7 +15,7 @@ gapi.load('client', function() {
       var sheetName = 'Attendees';//'SHEET_NAME'
       var sheetRange = sheetName + '!A1:C1';
       // Define the data to write
-      var qrCodeMessage = document.getElementById('result').innerHTML;
+      var qrCodeMessage = document.getElementById("result").innerHTML;
       var rowData = [qrCodeMessage, new Date().toString()];
       // Append the data to the sheet
       return gapi.client.sheets.spreadsheets.values.append({
