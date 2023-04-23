@@ -32,7 +32,7 @@
   let shouldStoreData = true;
   async function storeData(qrData) {
     shouldStoreData = false;
-     var myHeaders = new Headers();
+    var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({
@@ -56,6 +56,20 @@
       .catch(error => console.log('error', error));
   }
 
+  //   async function onScanSuccess(qrCodeMessage) {
+  //   document.getElementById('result').innerHTML = '<span class="result">' + qrCodeMessage + '</span>';
+  //   const split1 = qrCodeMessage.split(";");
+  //   const lastName = split1[0].split(":")[1];
+  //   const firstName = split1[1].split(":")[1];
+  //   const org = split1[2].split(":")[1];
+  //   const email = split1[3].split(":")[1];
+
+  //   // Save the data to a Google Sheet
+  //   if(shouldStoreData) {
+  //       await storeData([lastName, firstName, org, email])
+  //     }
+  // }
+
   async function onScanSuccess(qrCodeMessage) {
     document.getElementById('result').innerHTML = '<span class="result">' + qrCodeMessage + '</span>';
     const split1 = qrCodeMessage.split(";");
@@ -63,7 +77,7 @@
     const tel = split1[1].split(":")[1]
     const email = split1[2].split(":")[1]
 
-    if(shouldStoreData) {
+    if (shouldStoreData) {
       await storeData([name, tel, email])
     }
 
