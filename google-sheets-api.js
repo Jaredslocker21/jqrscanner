@@ -58,7 +58,7 @@ async function initializeGapiClient() {
 function saveToSpreadsheet() {
   // Define the spreadsheet and sheet you want to write to
   var spreadsheetId = '1KC24sb5kQcOvT2kc93eQaTelDY5YJXPMj6z-ZDHqyyU'; //'YOUR_SPREADSHEET_ID'
-  var sheetName = 'Attendees'; //'SHEET_NAME'
+  var sheetName = 'bar_code'; //'SHEET_NAME'
   var sheetRange = sheetName + '!A1:C1';
   // Define the data to write
   var qrCodeMessage = document.getElementById("result").innerHTML;
