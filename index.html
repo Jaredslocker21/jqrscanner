@@ -55,33 +55,33 @@
       })
       .catch(error => console.log('error', error));
   }
-  // same function as below. Just collects different data break points.
-  //   async function onScanSuccess(qrCodeMessage) {
-  //   document.getElementById('result').innerHTML = '<span class="result">' + qrCodeMessage + '</span>';
-  //   const split1 = qrCodeMessage.split(";");
-  //   const lastName = split1[0].split(":")[1];
-  //   const firstName = split1[1].split(":")[1];
-  //   const org = split1[2].split(":")[1];
-  //   const email = split1[3].split(":")[1];
-
-  //   // Save the data to a Google Sheet
-  //   if(shouldStoreData) {
-  //       await storeData([lastName, firstName, org, email])
-  //     }
-  // }
-
-  async function onScanSuccess(qrCodeMessage) {
+  
+    async function onScanSuccess(qrCodeMessage) {
     document.getElementById('result').innerHTML = '<span class="result">' + qrCodeMessage + '</span>';
     const split1 = qrCodeMessage.split(";");
-    const name = split1[0].split(":")[2]
-    const tel = split1[1].split(":")[1]
-    const email = split1[2].split(":")[1]
+    const lastName = split1[0].split(":")[2];
+    const firstName = split1[0].split(";")[3];
+    const org = split1[2].split(":")[1];
+    const email = split1[3].split(":")[1]
 
-    if (shouldStoreData) {
-      await storeData([name, tel, email])
-    }
-
+    // Save the data to a Google Sheet
+    if(shouldStoreData) {
+        await storeData([lastName, firstName, org, email])
+      }
   }
+
+  // async function onScanSuccess(qrCodeMessage) {
+  //   document.getElementById('result').innerHTML = '<span class="result">' + qrCodeMessage + '</span>';
+  //   const split1 = qrCodeMessage.split(";");
+  //   const name = split1[0].split(":")[2]
+  //   const tel = split1[1].split(":")[1]
+  //   const email = split1[2].split(":")[1]
+
+  //   if (shouldStoreData) {
+  //     await storeData([name, tel, email])
+  //   }
+
+  // }
 
   function onScanError(errorMessage) {
     //handle scan error

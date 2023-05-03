@@ -25,7 +25,7 @@ async function createRow(data) {
         const response = await writeValueToSpreadsheet({
             spreadsheetId,
             auth,
-            range: '!A1:C1',
+            range: '!A1:E1',
             rowData: data
         })
     } catch (error) {
