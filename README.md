@@ -2,7 +2,7 @@
 https://jaredslocker21.github.io/jqrscanner/
 
 the google sheets api is written to a sheet that belongs to one of my google accounts.
-Data will not be hsared unless consent is given. 
+Data will not be shared unless consent is given. 
 
 All code is open source.
 
