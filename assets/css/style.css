@@ -6,3 +6,7 @@
   .row {
     display: flex;
   }
+
+  .first-div  {
+    color: blueviolet;
+  }
