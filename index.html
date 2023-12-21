@@ -21,7 +21,7 @@
   </div>
   <div class="col" style="padding:30px;">
     <h4>SCAN RESULT</h4>
-    <div id="result">Result Here</div>
+    <div id="result">Attendee Here</div>
   </div>
 
   <div>
@@ -57,33 +57,69 @@
       })
       .catch(error => console.log('error', error));
   }
-  
-    async function onScanSuccess(qrCodeMessage) {
-    document.getElementById('result').innerHTML = '<span class="result">' + qrCodeMessage + '</span>';
-    const split1 = qrCodeMessage.split(";");
-    const lastName = split1[0].split(":")[2];
-    const firstName = split1[0].split(";")[3];
-    const org = split1[2].split(":")[1];
-    const email = split1[3].split(":")[1]
 
-    // Save the data to a Google Sheet
-    if(shouldStoreData) {
-        await storeData([lastName, firstName, org, email])
+  function displayInfo(label, value) {
+  let resultElement = document.getElementById('result');
+  resultElement.innerHTML += `<p><strong>${label}:</strong> ${value}</p>`;
+}
+  
+async function onScanSuccess(qrCodeMessage) {
+  const vcardSplit = qrCodeMessage.split("\n");
+
+  let firstName = "";
+  let lastName = "";
+  let company = "";
+  let email = "";
+
+  for (let index in vcardSplit) {
+    let partInfo = vcardSplit[index].trim();
+    const infoSplit = partInfo.split(":");
+
+    if (infoSplit.length >= 2) {
+      const key = infoSplit[0].trim();
+      const value = infoSplit.slice(1).join(":").trim();
+
+      console.log("Key:", key);
+      console.log("Value:", value);
+
+      if (key === "N;CHARSET=UTF-8") {
+        console.log("Processing Name:", value);
+        const nameSplit = value.split(";");
+        console.log("Name Split:", nameSplit);
+        if (nameSplit.length >= 2) {
+          firstName = nameSplit[1];
+          lastName = nameSplit[0];
+        } else {
+          lastName = nameSplit[0];
+        }
+      } else if (key === "ORG") {
+        company = value;
+      } else if (key === "EMAIL") {
+        email = value;
       }
+      else if (key.startsWith("ORG")) {
+      company = value;
+      }
+    }
   }
 
-  // async function onScanSuccess(qrCodeMessage) {
-  //   document.getElementById('result').innerHTML = '<span class="result">' + qrCodeMessage + '</span>';
-  //   const split1 = qrCodeMessage.split(";");
-  //   const name = split1[0].split(":")[2]
-  //   const tel = split1[1].split(":")[1]
-  //   const email = split1[2].split(":")[1]
+  // Display relevant information
+  displayInfo("First Name", firstName);
+  displayInfo("Last Name", lastName);
+  displayInfo("Company", company);
+  displayInfo("Email", email);
 
-  //   if (shouldStoreData) {
-  //     await storeData([name, tel, email])
-  //   }
+  // Save the data to a Google Sheet
+  if (shouldStoreData) {
+    await storeData([firstName + " " + lastName, company, email]);
+  }
 
-  // }
+  // Log information to the console for testing
+  console.log("First Name:", firstName);
+  console.log("Last Name:", lastName);
+  console.log("Company:", company);
+  console.log("Email:", email);
+}
 
   function onScanError(errorMessage) {
     //handle scan error
