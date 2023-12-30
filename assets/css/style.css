@@ -1,12 +1,40 @@
+/* Global styles */
+body {
+  font-family: Arial, sans-serif;
+}
+
+/* Common styles for results */
 .result {
-    color: #000000;
-    padding: 20px;
-  }
+  color: #000000;
+  padding: 20px;
+  margin-bottom: 20px; /* Add margin between result bubbles */
+  border: 1px solid #ccc; /* Add a border for separation */
+  border-radius: 10px; /* Adjust the border-radius as needed */
+}
 
-  .row {
-    display: flex;
-  }
+/* Flex layout for rows */
+.row {
+  display: flex;
+}
 
-  .first-div  {
-    color: blueviolet;
-  }
+/* Styles for the first div in a row */
+.first-div {
+  color: blueviolet;
+}
+
+/* Styles for the result container */
+#resultContainer {
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 20px auto;
+}
+
+/* Styles for result list items */
+#resultList span {
+  display: block;
+}
+
+/* Darker green on hover for result list items */
+#resultList span:hover {
+  background-color: #45a049;
+}
